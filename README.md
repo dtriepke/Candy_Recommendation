@@ -9,7 +9,7 @@
 ***
 
 - `Halloween Candy.ipynb` result from regression analysis and recommender engine (at the end)
-- `candyRecommender.py` function container for keras MLP classifier
+- `candy_recommender.py` function container for keras MLP classifier
 - `deepQLearningSimple.py ` DQN agent functions   
 - `trainModel.py` model trainig with 500 episodes a batch size of 3 with survey data: data/candy-data.csv
 - `data\` contains the candy data 

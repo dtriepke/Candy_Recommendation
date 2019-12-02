@@ -129,28 +129,36 @@ class neural_network_keras :
         self.net.save("data/model/{}".format(name))
 
 
-def recommend(*args):
-    # Load model
-    print("load modle")
-    model_name = "recommender_model.h5"
-    pathImp = "data/model/"
-    recommender_model = load_model(pathImp + model_name)
-    
-    #create input vector
-    X_pred = np.zeros(9)
-    properties = args[0]
-    X_pred[0] = 1 if "chocolate" in properties else 0
-    X_pred[1] = 1 if "fruity" in properties else 0
-    X_pred[2] = 1 if "caramel" in properties else 0
-    X_pred[3] = 1 if "peanutyalmondy" in properties else 0
-    X_pred[4] = 1 if "nougat" in properties else 0
-    X_pred[5] = 1 if "crispedricewafer" in properties else 0
-    X_pred[6] = 1 if "hard" in properties else 0
-    X_pred[7] = 1 if "bar" in properties else 0
-    X_pred[8] = 1 if "pluribus" in properties else 0
-    X_pred = np.array([X_pred])
-    print(X_pred)
+class RecommanderModel:
 
-    y_pred = recommender_model.predict_classes(X_pred)
+    def __init__(self):
 
-    print("Matchup win expectation between: {}% and {}% .".format((y_pred[0] -1)*10, y_pred[0]*10))   
+        # Load model
+        MODEL_NAME = "recommender_model.h5"
+        PATH_IMP = "data/model/"
+        print("load modle from: ", PATH_IMP)
+        self.recommender_model = load_model(PATH_IMP + MODEL_NAME)
+
+
+    def recommend(self, *args):
+        
+        #create input vector
+        X_pred = np.zeros(9)
+        properties = args[0]
+        X_pred[0] = 1 if "chocolate" in properties else 0
+        X_pred[1] = 1 if "fruity" in properties else 0
+        X_pred[2] = 1 if "caramel" in properties else 0
+        X_pred[3] = 1 if "peanutyalmondy" in properties else 0
+        X_pred[4] = 1 if "nougat" in properties else 0
+        X_pred[5] = 1 if "crispedricewafer" in properties else 0
+        X_pred[6] = 1 if "hard" in properties else 0
+        X_pred[7] = 1 if "bar" in properties else 0
+        X_pred[8] = 1 if "pluribus" in properties else 0
+        X_pred = np.array([X_pred])
+        print("X_vec = ", X_pred)
+
+        y_pred = self.recommender_model.predict_classes(X_pred)
+
+        print("Matchup win expectation between: {}% and {}% .".format((y_pred[0] -1)*10, y_pred[0]*10)) 
+
+        return [(y_pred[0] -1)*10 , y_pred[0]*10]

@@ -1,2 +1,4 @@
-ipynb_checkpoints/
+.ipynb_checkpoints/
 __pycache__/
+.Rproj.user
+00_R_Code/
